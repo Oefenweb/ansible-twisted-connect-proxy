@@ -24,6 +24,6 @@ script
     --make-pidfile \
     --pidfile {{ twisted_connect_proxy_pid_file }} \
     --exec {{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy \
-    --{{ twisted_connect_proxy_port }}{% for key, value in twisted_connect_proxy_options.iteritems() %} -{{ key }} {{ value }}{% endfor %} \
+    -- {{ twisted_connect_proxy_port }}{% for key, value in twisted_connect_proxy_options.iteritems() %} -{{ key }} {{ value }}{% endfor %} \
     >> {{ twisted_connect_proxy_log_file }} 2>&1
 end script
