@@ -23,7 +23,7 @@ Set up (the latest version of) [Twisted connect proxy](https://github.com/fmoo/t
 
 None
 
-#### Example (with any options)
+#### Example (without any options)
 
 ```yaml
 ---
