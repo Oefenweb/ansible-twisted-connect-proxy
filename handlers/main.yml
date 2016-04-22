@@ -1,0 +1,6 @@
+# handlers file for twisted-connect-proxy
+---
+- name: restart twisted-connect-proxy
+  service:
+    name: twisted-connect-proxy
+    state: restarted

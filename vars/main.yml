@@ -1,0 +1,9 @@
+# vars file for twisted-connect-proxy
+---
+twisted_connect_proxy_dependencies:
+  - python-twisted
+
+twisted_connect_proxy_downloads_path: /var/lib/ansible/twisted-connect-proxy/downloads
+
+twisted_connect_proxy_log_file: /var/log/twisted-connect-proxy/twisted-connect-proxy.log
+twisted_connect_proxy_pid_file: /var/run/twisted-connect-proxy.pid

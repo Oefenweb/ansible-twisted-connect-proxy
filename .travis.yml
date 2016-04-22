@@ -1,0 +1,82 @@
+---
+sudo: required
+dist: trusty
+
+language: python
+python: "2.7"
+
+env:
+  - ANSIBLE_VERSION=latest
+  - ANSIBLE_VERSION=2.0.2.0
+  - ANSIBLE_VERSION=2.0.1.0
+  - ANSIBLE_VERSION=2.0.0.2
+  - ANSIBLE_VERSION=2.0.0.1
+  - ANSIBLE_VERSION=2.0.0.0
+  - ANSIBLE_VERSION=1.9.6
+  - ANSIBLE_VERSION=1.9.5
+  - ANSIBLE_VERSION=1.9.4
+  - ANSIBLE_VERSION=1.9.3
+  - ANSIBLE_VERSION=1.9.2
+  - ANSIBLE_VERSION=1.9.1
+  - ANSIBLE_VERSION=1.9.0.1
+  - ANSIBLE_VERSION=1.8.4
+  - ANSIBLE_VERSION=1.8.3
+  - ANSIBLE_VERSION=1.8.2
+  - ANSIBLE_VERSION=1.8.1
+  - ANSIBLE_VERSION=1.8
+  - ANSIBLE_VERSION=1.7.2
+  - ANSIBLE_VERSION=1.7.1
+  - ANSIBLE_VERSION=1.7
+  - ANSIBLE_VERSION=1.6.9
+  - ANSIBLE_VERSION=1.6.8
+  - ANSIBLE_VERSION=1.6.7
+  - ANSIBLE_VERSION=1.6.6
+  - ANSIBLE_VERSION=1.6.5
+  - ANSIBLE_VERSION=1.6.4
+  - ANSIBLE_VERSION=1.6.3
+  - ANSIBLE_VERSION=1.6.2
+  - ANSIBLE_VERSION=1.6.10
+  - ANSIBLE_VERSION=1.6.1
+  - ANSIBLE_VERSION=1.6
+
+branches:
+  only:
+    - master
+
+before_install:
+  - sudo apt-get update -qq
+
+  # Install curl
+  - sudo apt-get install --yes curl
+
+install:
+  # Install Ansible.
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install --no-binary ansible ansible; else pip install --no-binary ansible ansible==$ANSIBLE_VERSION; fi
+
+script:
+  # Check the role/playbook's syntax.
+  - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
+
+  # Run the role/playbook with ansible-playbook.
+  - ansible-playbook -i tests/inventory tests/test.yml -vvvv
+
+  # Run the role/playbook again, checking to make sure it's idempotent.
+  - >
+    ansible-playbook -i tests/inventory tests/test.yml
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+
+  # Test proxy connection
+  - >
+    curl -s --head https://www.google.nl --proxy https://127.0.0.1:3128
+    | grep -q '200 OK'
+    && (echo 'Availability test: pass' && exit 0)
+    || (echo 'Availability test: fail' && exit 1)
+
+notifications:
+  email: false
+  hipchat:
+    rooms:
+      secure: xhyTKqbkO2gYXNhViAOyzb6mj7xjN1GCDfpELd8rxkQ/RK6e9KN8ofbFdfjz4Q8NKuimNBbpDUuNS7sZZJkvi8UE6YrZ/JZZjY9ewUbZ0Ie4ZFvE9vZYb8cw6Dm2UNyMJoSP/kivrVFKBxvebkA2BbkW5WLEBYF/dUNxFpRkkrUrKmGIHiI9Dz4a+qwhYv/AEWbwI31t8Fpda2BaoWfmleDC2XAIpL4931Pt5UcamCNlgziw1PTltl07w0xyQ49NvODRs/8zPT/aT/VgMpxqhAULMYfa69UQenNZgXgThH8npaLoLDAi0mi2pinpnRsGAGKC0wjLmz3RFPb9DiOeGMnEl5pC/TiSNM+k/C+rAIiQ3H25vOG3FKwHdGLLnTVEA4ONJy27hzt4aBvZ9h6TdYWcJoS254P543JuznCxs6afesPxkr0tj6xVsNOxlcuxRoaeSuISbzyy+nct4fL7KiHof9iD7Zy1xZRrqQQUP4PtN2biVdVjPGnsZog9Qdr93/hJh2uAv+ZdI2Eb+HQMG8d9WmFLCkfDBerHbXPkJK2bAmMHPDT1mfrqgU/kFMayRaXSnC0wHPvewIyDALTbGvvv4FNJwaFr62fNXXlrD3m6E0YDOSVm1ql8glWOGbaUxmal9PpDVC3+YC6zrCFIK8WFlQLSE5Mo6C3/1OG0Hro=
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

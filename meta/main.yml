@@ -1,0 +1,19 @@
+# meta file for twisted-connect-proxy
+---
+galaxy_info:
+  author: Mischa ter Smitten
+  company: Oefenweb.nl B.V.
+  description: Set up (the latest version of) Twisted connect proxy in Ubuntu systems
+  license: MIT
+  min_ansible_version: 1.6
+  platforms:
+    - name: Ubuntu
+      versions:
+        - precise
+        - trusty
+  galaxy_tags:
+    - development
+    - system
+    - networking
+    - proxy
+dependencies: []

@@ -1,0 +1,7 @@
+# test file for twisted-connect-proxy
+---
+- hosts: all
+  remote_user: vagrant
+  sudo: true
+  roles:
+    - ../../

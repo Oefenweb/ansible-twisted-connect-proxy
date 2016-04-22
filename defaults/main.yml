@@ -1,0 +1,10 @@
+# defaults file for twisted-connect-proxy
+---
+twisted_connect_proxy_install_prefix: /usr/local/bin
+
+twisted_connect_proxy_user: twisted-connect-proxy
+twisted_connect_proxy_group: twisted-connect-proxy
+twisted_connect_proxy_groups: []
+
+twisted_connect_proxy_port: ''
+twisted_connect_proxy_options: {}

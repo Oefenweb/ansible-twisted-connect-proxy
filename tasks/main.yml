@@ -1,0 +1,19 @@
+# tasks file for twisted-connect-proxy
+---
+- include: install.yml
+  tags:
+    - configuration
+    - twisted-connect-proxy
+    - twisted-connect-proxy-install
+
+- include: user.yml
+  tags:
+    - configuration
+    - twisted-connect-proxy
+    - twisted-connect-proxy-user
+
+- include: service.yml
+  tags:
+    - configuration
+    - twisted-connect-proxy
+    - twisted-connect-proxy-service
