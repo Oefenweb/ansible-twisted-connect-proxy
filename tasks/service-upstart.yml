@@ -1,6 +1,6 @@
 # tasks file for twisted-connect-proxy
 ---
-- name: create init script
+- name: service | upstart | update script
   template:
     src: etc/init/twisted-connect-proxy.conf.j2
     dest: /etc/init/twisted-connect-proxy.conf
@@ -9,12 +9,4 @@
     mode: 0644
   notify: restart twisted-connect-proxy
   tags:
-    - twisted-connect-proxy-service-init
-
-- name: start and enable service
-  service:
-    name: twisted-connect-proxy
-    state: started
-    enabled: true
-  tags:
-    - twisted-connect-proxy-service-start-enable
+    - twisted-connect-proxy-service-upstart-update

@@ -1,6 +1,6 @@
 # tasks file for twisted-connect-proxy
 ---
-- name: add group
+- name: user | add group
   group:
     name: "{{ item }}"
   with_flattened:
@@ -10,7 +10,7 @@
     - twisted-connect-proxy-user-add
     - twisted-connect-proxy-user-add-group
 
-- name: add user
+- name: user | add user
   user:
     name: "{{ twisted_connect_proxy_user }}"
     group: "{{ twisted_connect_proxy_group }}"

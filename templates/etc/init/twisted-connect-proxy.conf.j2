@@ -12,9 +12,9 @@ respawn
 umask 022
 
 pre-start script
-  test -x {{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy || { stop; exit 0; }
+  test -x {{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy
 
-  install -d -o {{ twisted_connect_proxy_user }} -g {{ twisted_connect_proxy_group }} -m 0755 {{ twisted_connect_proxy_log_file | dirname }} || true
+  install -d -o {{ twisted_connect_proxy_user }} -g {{ twisted_connect_proxy_group }} -m 0755 {{ twisted_connect_proxy_log_file | dirname }}
 end script
 
 script
