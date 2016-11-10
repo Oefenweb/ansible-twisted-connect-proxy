@@ -1,0 +1,19 @@
+# tasks file for twisted-connect-proxy
+---
+- name: service | systemd | update script
+  template:
+    src: templates/lib/systemd/system/twisted-connect-proxy.j2
+    dest: /lib/systemd/system/twisted-connect-proxy.service
+    owner: root
+    group: root
+    mode: 0644
+  register: update_systemd_script
+  notify: restart twisted-connect-proxy
+  tags:
+    - twisted-connect-proxy-service-systemd-update
+
+- name: service | systemd | reload
+  command: systemctl daemon-reload
+  when: update_systemd_script | changed
+  tags:
+    - twisted-connect-proxy-service-systemd-reload

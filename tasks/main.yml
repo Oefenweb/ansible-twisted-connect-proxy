@@ -12,8 +12,28 @@
     - twisted-connect-proxy
     - twisted-connect-proxy-user
 
-- include: service.yml
+- include: service-upstart.yml
+  when: ansible_distribution_version | version_compare('15.04', '<')
   tags:
     - configuration
     - twisted-connect-proxy
     - twisted-connect-proxy-service
+    - twisted-connect-proxy-service-upstart
+
+- include: service-systemd.yml
+  when: ansible_distribution_version | version_compare('15.04', '>=')
+  tags:
+    - configuration
+    - twisted-connect-proxy
+    - twisted-connect-proxy-service
+    - twisted-connect-proxy-service-systemd
+
+- name: start and enable service
+  service:
+    name: twisted-connect-proxy
+    state: started
+    enabled: true
+  tags:
+    - configuration
+    - twisted-connect-proxy
+    - twisted-connect-proxy-start-enable-service

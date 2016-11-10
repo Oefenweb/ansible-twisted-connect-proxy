@@ -1,0 +1,24 @@
+; {{ ansible_managed }}
+
+[Unit]
+Description=Twisted connect proxy
+After=network.target
+
+[Service]
+Type=simple
+PermissionsStartOnly=true
+ExecStartPre=/usr/bin/test -x {{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy
+ExecStartPre=/usr/bin/install -d \
+  -o {{ twisted_connect_proxy_user }} \
+  -g {{ twisted_connect_proxy_group }} \
+  -m 0755 \
+  {{ twisted_connect_proxy_log_file | dirname }}
+ExecStart=/bin/sh -c \
+  '{{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy {{ twisted_connect_proxy_port }} {% for key, value in twisted_connect_proxy_options.iteritems() %} -{{ key }} {{ value }}{% endfor %} >> {{ twisted_connect_proxy_log_file }} 2>&1'
+PIDFile={{ twisted_connect_proxy_pid_file }}
+Restart=always
+User={{ twisted_connect_proxy_user }}
+Group={{ twisted_connect_proxy_group }}
+
+[Install]
+WantedBy=multi-user.target

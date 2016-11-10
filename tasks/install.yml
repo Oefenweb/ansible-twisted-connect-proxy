@@ -1,16 +1,16 @@
 # tasks file for twisted-connect-proxy
 ---
-- name: install dependencies
+- name: install | dependencies
   apt:
     name: "{{ item }}"
-    state: latest
+    state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
   with_items: "{{ twisted_connect_proxy_dependencies }}"
   tags:
     - twisted-connect-proxy-install-dependencies
 
-- name: create (download) directory
+- name: install | create (download) directory
   file:
     path: "{{ twisted_connect_proxy_downloads_path }}"
     state: directory
@@ -21,7 +21,7 @@
     - twisted-connect-proxy-install-download
     - twisted-connect-proxy-install-download-directory
 
-- name: download
+- name: install | download
   get_url:
     url: "https://raw.githubusercontent.com/fmoo/twisted-connect-proxy/master/server.py"
     dest: "{{ twisted_connect_proxy_downloads_path }}/server.py"
@@ -34,7 +34,7 @@
     - twisted-connect-proxy-install-download
     - twisted-connect-proxy-install-download-get
 
-- name: install
+- name: install | install
   file:
     src: "{{ twisted_connect_proxy_downloads_path }}/server.py"
     dest: "{{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy"
