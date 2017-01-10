@@ -15,6 +15,7 @@ ExecStartPre=/usr/bin/install -d \
   {{ twisted_connect_proxy_log_file | dirname }}
 ExecStart=/bin/sh -c \
   '{{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy {{ twisted_connect_proxy_port }} {% for key, value in twisted_connect_proxy_options.iteritems() %} -{{ key }} {{ value }}{% endfor %} >> {{ twisted_connect_proxy_log_file }} 2>&1'
+
 PIDFile={{ twisted_connect_proxy_pid_file }}
 Restart=always
 User={{ twisted_connect_proxy_user }}
