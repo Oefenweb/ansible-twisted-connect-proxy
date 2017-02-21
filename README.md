@@ -10,6 +10,7 @@ Set up (the latest version of) [Twisted connect proxy](https://github.com/fmoo/t
 
 #### Variables
 
+* `twisted_connect_proxy_version` [default: `master`]: Version to install (e.g. `74e49d2cca65447ab1937273e0a56af1c22dbb3a`)
 * `twisted_connect_proxy_install_prefix` [default: `/usr/local/bin`]: Install prefix
 
 * `twisted_connect_proxy_user` [default: `twisted-connect-proxy`]: The user that will run the `twisted-connect-proxy` daemon

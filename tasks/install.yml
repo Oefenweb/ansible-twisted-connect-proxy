@@ -23,7 +23,7 @@
 
 - name: install | download
   get_url:
-    url: "https://raw.githubusercontent.com/fmoo/twisted-connect-proxy/master/server.py"
+    url: "https://raw.githubusercontent.com/fmoo/twisted-connect-proxy/{{ twisted_connect_proxy_version }}/server.py"
     dest: "{{ twisted_connect_proxy_downloads_path }}/server.py"
     owner: root
     group: root
