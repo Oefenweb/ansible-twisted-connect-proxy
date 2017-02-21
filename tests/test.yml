@@ -6,4 +6,5 @@
   roles:
     - ../../
   vars:
+    twisted_connect_proxy_version: 74e49d2cca65447ab1937273e0a56af1c22dbb3a
     twisted_connect_proxy_port: 3128
