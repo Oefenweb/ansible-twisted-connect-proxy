@@ -28,9 +28,6 @@ branches:
 before_install:
   - sudo apt-get update -qq
 
-  # Install curl
-  - sudo apt-get install --yes curl
-
 install:
   # Install Ansible.
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
@@ -49,13 +46,6 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
-
-  # Test proxy connection
-  - >
-    curl -s --head https://www.google.nl --proxy https://127.0.0.1:3128
-    | grep -q '200 OK'
-    && (echo 'Availability test: pass' && exit 0)
-    || (echo 'Availability test: fail' && exit 1)
 
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then ansible-lint tests/test.yml || true; fi
 

@@ -5,3 +5,7 @@
   become: true
   roles:
     - ../../
+  post_tasks:
+    - include: post.yml
+  vars:
+    twisted_connect_proxy_port: 3128
