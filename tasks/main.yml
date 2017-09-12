@@ -13,7 +13,7 @@
     - twisted-connect-proxy-user
 
 - include: service-upstart.yml
-  when: ansible_distribution_version | version_compare('15.04', '<')
+  when: ansible_service_mgr != 'systemd'
   tags:
     - configuration
     - twisted-connect-proxy
@@ -21,7 +21,7 @@
     - twisted-connect-proxy-service-upstart
 
 - include: service-systemd.yml
-  when: ansible_distribution_version | version_compare('15.04', '>=')
+  when: ansible_service_mgr == 'systemd'
   tags:
     - configuration
     - twisted-connect-proxy
