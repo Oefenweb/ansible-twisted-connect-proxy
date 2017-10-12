@@ -12,18 +12,19 @@ respawn
 umask 022
 
 pre-start script
-  test -x {{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy
-
-  install -d -o {{ twisted_connect_proxy_user }} -g {{ twisted_connect_proxy_group }} -m 0755 {{ twisted_connect_proxy_log_file | dirname }}
+  /usr/bin/test -x {{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy
 end script
 
 script
+  set -a
+  [ -r /etc/default/twisted-connect-proxy ] && . /etc/default/twisted-connect-proxy
+
   exec start-stop-daemon \
     --start \
     --chuid {{ twisted_connect_proxy_user }} \
     --make-pidfile \
     --pidfile {{ twisted_connect_proxy_pid_file }} \
     --exec {{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy \
-    -- {{ twisted_connect_proxy_port }}{% for key, value in twisted_connect_proxy_options.iteritems() %} -{{ key }} {{ value }}{% endfor %} \
+    -- ${DAEMON_ARGS} \
     >> {{ twisted_connect_proxy_log_file }} 2>&1
 end script

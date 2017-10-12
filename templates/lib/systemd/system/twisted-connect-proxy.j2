@@ -6,15 +6,10 @@ After=network.target
 
 [Service]
 Type=simple
-PermissionsStartOnly=true
+EnvironmentFile=-/etc/default/twisted-connect-proxy
 ExecStartPre=/usr/bin/test -x {{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy
-ExecStartPre=/usr/bin/install -d \
-  -o {{ twisted_connect_proxy_user }} \
-  -g {{ twisted_connect_proxy_group }} \
-  -m 0755 \
-  {{ twisted_connect_proxy_log_file | dirname }}
 ExecStart=/bin/sh -c \
-  '{{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy {{ twisted_connect_proxy_port }} {% for key, value in twisted_connect_proxy_options.iteritems() %} -{{ key }} {{ value }}{% endfor %} >> {{ twisted_connect_proxy_log_file }} 2>&1'
+  '{{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy ${DAEMON_ARGS} >> {{ twisted_connect_proxy_log_file }} 2>&1'
 
 PIDFile={{ twisted_connect_proxy_pid_file }}
 Restart=always

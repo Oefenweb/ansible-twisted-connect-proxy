@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+#
+# twisted-connect-proxy configure options
+
+DAEMON_ARGS='{{ twisted_connect_proxy_port }}{% for key, value in twisted_connect_proxy_options.iteritems() %} -{{ key }} {{ value }}{% endfor %}'
