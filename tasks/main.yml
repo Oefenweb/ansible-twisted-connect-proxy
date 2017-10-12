@@ -1,5 +1,13 @@
 # tasks file for twisted-connect-proxy
 ---
+- name: facts | set
+  set_fact:
+     is_docker_guest: "{{ ansible_virtualization_role | default('host') == 'guest' and ansible_virtualization_type | default('none') == 'docker' }}"
+  tags:
+    - configuration
+    - twisted-connect
+    - twisted-connect-facts
+
 - include: install.yml
   tags:
     - configuration
@@ -12,21 +20,36 @@
     - twisted-connect-proxy
     - twisted-connect-proxy-user
 
-- include: service-upstart.yml
-  when: ansible_service_mgr != 'systemd'
+- include: configure.yml
   tags:
     - configuration
-    - twisted-connect-proxy
-    - twisted-connect-proxy-service
-    - twisted-connect-proxy-service-upstart
+    - twisted-connect
+    - twisted-connect-configure
 
-- include: service-systemd.yml
-  when: ansible_service_mgr == 'systemd'
+- block:
+    - include: service-initd.yml
+  when: is_docker_guest
   tags:
     - configuration
-    - twisted-connect-proxy
-    - twisted-connect-proxy-service
-    - twisted-connect-proxy-service-systemd
+    - twisted-connect
+    - twisted-connect-service
+    - twisted-connect-service-initd
+
+- block:
+    - include: service-upstart.yml
+      when: ansible_service_mgr != 'systemd'
+      tags:
+        - twisted-connect-service-upstart
+
+    - include: service-systemd.yml
+      when: ansible_service_mgr == 'systemd'
+      tags:
+        - twisted-connect-service-systemd
+  when: not is_docker_guest
+  tags:
+    - configuration
+    - twisted-connect
+    - twisted-connect-service
 
 - name: start and enable service
   service:

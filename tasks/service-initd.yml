@@ -1,0 +1,12 @@
+# tasks file for twisted-connect-proxy
+---
+- name: service | initd | update script
+  template:
+    src: etc/init.d/twisted-connect-proxy.j2
+    dest: /etc/init.d/twisted-connect-proxy
+    owner: root
+    group: root
+    mode: 0755
+  notify: restart twisted-connect-proxy
+  tags:
+    - twisted-connect-proxy-service-initd-update
