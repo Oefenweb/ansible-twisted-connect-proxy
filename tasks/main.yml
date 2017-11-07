@@ -54,8 +54,8 @@
 - name: start and enable service
   service:
     name: twisted-connect-proxy
-    state: started
-    enabled: true
+    state: "{{ service_default_state | default('started') }}"
+    enabled: "{{ service_default_enabled | default(true) | bool }}"
   tags:
     - configuration
     - twisted-connect-proxy
