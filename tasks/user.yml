@@ -3,6 +3,7 @@
 - name: user | add group
   group:
     name: "{{ item }}"
+    system: true
   with_flattened:
     - "{{ twisted_connect_proxy_group }}"
     - "{{ twisted_connect_proxy_groups }}"
@@ -13,6 +14,7 @@
 - name: user | add user
   user:
     name: "{{ twisted_connect_proxy_user }}"
+    system: true
     group: "{{ twisted_connect_proxy_group }}"
     groups: "{{ twisted_connect_proxy_groups | join(',') }}"
     home: /nonexistent
