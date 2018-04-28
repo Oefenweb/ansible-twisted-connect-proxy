@@ -2,8 +2,8 @@
 ---
 - name: service | systemd | update script
   template:
-    src: templates/lib/systemd/system/twisted-connect-proxy.j2
-    dest: /lib/systemd/system/twisted-connect-proxy.service
+    src: etc/systemd/system/twisted-connect-proxy.j2
+    dest: /etc/systemd/system/twisted-connect-proxy.service
     owner: root
     group: root
     mode: 0644
