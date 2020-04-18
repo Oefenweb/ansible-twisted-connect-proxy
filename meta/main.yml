@@ -1,6 +1,7 @@
 # meta file for twisted-connect-proxy
 ---
 galaxy_info:
+  role_name: twisted-connect-proxy
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
   description: Set up (the latest version of) Twisted connect proxy in Ubuntu systems
