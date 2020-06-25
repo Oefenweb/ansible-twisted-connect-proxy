@@ -2,8 +2,8 @@
 ---
 - name: service | initd | update script
   template:
-    src: etc/init.d/twisted-connect-proxy.j2
-    dest: /etc/init.d/twisted-connect-proxy
+    src: "{{ twisted_connect_proxy_etc_init_d_file.lstrip('/') }}.j2"
+    dest: "{{ twisted_connect_proxy_etc_init_d_file }}"
     owner: root
     group: root
     mode: 0755

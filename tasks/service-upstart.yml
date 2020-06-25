@@ -2,8 +2,8 @@
 ---
 - name: service | upstart | update script
   template:
-    src: etc/init/twisted-connect-proxy.conf.j2
-    dest: /etc/init/twisted-connect-proxy.conf
+    src: "{{ twisted_connect_proxy_etc_init_file.lstrip('/') }}.j2"
+    dest: "{{ twisted_connect_proxy_etc_init_file }}"
     owner: root
     group: root
     mode: 0644

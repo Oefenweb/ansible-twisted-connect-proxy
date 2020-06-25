@@ -7,3 +7,8 @@ twisted_connect_proxy_downloads_path: /var/lib/ansible/twisted-connect-proxy/dow
 
 twisted_connect_proxy_log_file: /var/log/twisted-connect-proxy/twisted-connect-proxy.log
 twisted_connect_proxy_pid_file: /var/run/twisted-connect-proxy.pid
+
+twisted_connect_proxy_etc_default_file: /etc/default/twisted-connect-proxy
+twisted_connect_proxy_etc_init_d_file: /etc/init.d/twisted-connect-proxy
+twisted_connect_proxy_etc_systemd_file: /etc/systemd/system/twisted-connect-proxy.service
+twisted_connect_proxy_etc_init_file: /etc/init/twisted-connect-proxy.conf

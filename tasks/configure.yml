@@ -18,7 +18,7 @@
     group: "{{ twisted_connect_proxy_group }}"
     mode: 0755
   with_items: "{{ _stat_directories.results }}"
-  when: item.stat is defined and item.stat.exists == false
+  when: item.stat is defined and not item.stat.exists
   tags:
     - twisted-connect-proxy-configure-directories
     - twisted-connect-proxy-configure-directories-create
@@ -31,8 +31,8 @@
     group: root
     mode: 0644
   with_items:
-    - src: etc/default/twisted-connect-proxy.j2
-      dest: /etc/default/twisted-connect-proxy
+    - src: "{{ twisted_connect_proxy_etc_default_file.lstrip('/') }}.j2"
+      dest: "{{ twisted_connect_proxy_etc_default_file }}"
   notify: restart twisted-connect-proxy
   tags:
     - twisted-connect-proxy-configure-configuration
