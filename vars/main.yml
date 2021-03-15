@@ -1,4 +1,4 @@
-# vars file for twisted-connect-proxy
+# vars file
 ---
 twisted_connect_proxy_dependencies:
   - python-twisted

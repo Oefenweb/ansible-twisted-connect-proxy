@@ -1,4 +1,4 @@
-# tasks file for twisted-connect-proxy
+# tasks file
 ---
 - name: service | systemd | update script
   template:

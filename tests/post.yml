@@ -1,4 +1,4 @@
-# post test file for twisted-connect-proxy
+# post test file
 ---
 - name: post | install dependencies
   apt:

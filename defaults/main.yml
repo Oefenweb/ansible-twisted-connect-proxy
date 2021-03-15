@@ -1,4 +1,4 @@
-# defaults file for twisted-connect-proxy
+# defaults file
 ---
 twisted_connect_proxy_version: master
 twisted_connect_proxy_install_prefix: /usr/local/bin

@@ -1,6 +1,7 @@
-# meta file for twisted-connect-proxy
+# meta file
 ---
 galaxy_info:
+  namespace: oefenweb
   role_name: twisted-connect-proxy
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
