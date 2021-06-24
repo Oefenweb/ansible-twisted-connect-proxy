@@ -1,6 +1,7 @@
 ## twisted-connect-proxy
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-twisted-connect-proxy.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-twisted-connect-proxy) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-twisted--connect--proxy-blue.svg)](https://galaxy.ansible.com/Oefenweb/twisted-connect-proxy/)
+[![CI](https://github.com/Oefenweb/ansible-twisted-connect-proxy/workflows/CI/badge.svg)](https://github.com/Oefenweb/ansible-twisted-connect-proxy/actions?query=workflow%3ACI)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-twisted--connect--proxy-blue.svg)](https://galaxy.ansible.com/Oefenweb/twisted_connect_proxy/)
 
 Set up (the latest version of) [Twisted connect proxy](https://github.com/fmoo/twisted-connect-proxy) in Ubuntu systems.
 
