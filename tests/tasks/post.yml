@@ -10,11 +10,11 @@
 
 - name: test tinyproxy installation
   command: >
-    curl -sL --head https://www.google.com --proxy http://{{ ansible_lo['ipv4']['address'] }}:{{ tinyproxy_port }}
+    curl -sL --head https://www.google.com --proxy http://{{ ansible_lo['ipv4']['address'] }}:{{ twisted_connect_proxy_port }}
   args:
     warn: false
   register: _result
   changed_when: false
-  failed_when: _result.stdout.find('HTTP/1.0 200') == -1
+  failed_when: _result.stdout.find('HTTP/1.1 200 CONNECT OK') == -1
   tags:
     - skip_ansible_lint
