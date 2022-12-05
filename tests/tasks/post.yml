@@ -8,11 +8,9 @@
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
 
-- name: test proxy installation
+- name: test proxy installation  # noqa command-instead-of-module
   command: >
     curl -sL --head https://www.google.com --proxy http://{{ ansible_lo['ipv4']['address'] }}:{{ twisted_connect_proxy_port }}
-  args:
-    warn: false
   register: _result
   changed_when: false
   failed_when: _result.stdout.find('HTTP/1.1 200 CONNECT OK') == -1
