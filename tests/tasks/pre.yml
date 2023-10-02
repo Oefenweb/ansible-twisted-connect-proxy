@@ -11,4 +11,4 @@
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
 
 - name: (re)gather facts
-  action: setup
+  ansible.builtin.setup: {}
