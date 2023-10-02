@@ -1,7 +1,7 @@
 # post test file
 ---
 - name: install test dependencies
-  apt:
+  ansible.builtin.apt:
     name:
       - net-tools
       - iproute2

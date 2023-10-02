@@ -1,7 +1,7 @@
 # handlers file
 ---
 - name: restart twisted-connect-proxy
-  service:
+  ansible.builtin.service:
     name: twisted-connect-proxy
     state: restarted
   when: service_default_state | default('started') == 'started'

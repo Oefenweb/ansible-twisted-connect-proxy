@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: service | upstart | update script
-  template:
+  ansible.builtin.template:
     src: "{{ twisted_connect_proxy_etc_init_file.lstrip('/') }}.j2"
     dest: "{{ twisted_connect_proxy_etc_init_file }}"
     owner: root
