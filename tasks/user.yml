@@ -1,18 +1,16 @@
 # tasks file
 ---
 - name: user | add group
-  group:
+  ansible.builtin.group:
     name: "{{ item }}"
     system: true
-  with_flattened:
-    - "{{ twisted_connect_proxy_group }}"
-    - "{{ twisted_connect_proxy_groups }}"
+  with_items: "{{ [twisted_connect_proxy_group] + twisted_connect_proxy_groups }}"
   tags:
     - twisted-connect-proxy-user-add
     - twisted-connect-proxy-user-add-group
 
 - name: user | add user
-  user:
+  ansible.builtin.user:
     name: "{{ twisted_connect_proxy_user }}"
     system: true
     group: "{{ twisted_connect_proxy_group }}"

@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: install | dependencies
-  apt:
+  ansible.builtin.apt:
     name: "{{ twisted_connect_proxy_dependencies }}"
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
@@ -10,7 +10,7 @@
     - twisted-connect-proxy-install-dependencies
 
 - name: install | create (download) directory
-  file:
+  ansible.builtin.file:
     path: "{{ twisted_connect_proxy_downloads_path }}"
     state: directory
     owner: root
@@ -21,7 +21,7 @@
     - twisted-connect-proxy-install-download-directory
 
 - name: install | download
-  get_url:
+  ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/fmoo/twisted-connect-proxy/{{ twisted_connect_proxy_version }}/server.py"
     dest: "{{ twisted_connect_proxy_downloads_path }}/server.py"
     owner: root
@@ -34,7 +34,7 @@
     - twisted-connect-proxy-install-download-get
 
 - name: install | install
-  file:
+  ansible.builtin.file:
     src: "{{ twisted_connect_proxy_downloads_path }}/server.py"
     dest: "{{ twisted_connect_proxy_install_prefix }}/twisted-connect-proxy"
     state: link

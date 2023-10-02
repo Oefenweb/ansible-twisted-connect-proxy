@@ -1,7 +1,7 @@
 # tasks file
 ---
 - name: configure | stat directories
-  stat:
+  ansible.builtin.stat:
     path: "{{ item }}/"
   register: _stat_directories
   with_items:
@@ -11,20 +11,22 @@
     - twisted-connect-proxy-configure-directories-stat
 
 - name: configure | create directories
-  file:
+  ansible.builtin.file:
     path: "{{ item.item }}"
     state: directory
     owner: "{{ twisted_connect_proxy_user }}"
     group: "{{ twisted_connect_proxy_group }}"
     mode: 0755
   with_items: "{{ _stat_directories.results }}"
-  when: item.stat is defined and not item.stat.exists
+  when:
+    - item.stat is defined
+    - not item.stat.exists
   tags:
     - twisted-connect-proxy-configure-directories
     - twisted-connect-proxy-configure-directories-create
 
 - name: configure | update configuration file(s)
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: root
