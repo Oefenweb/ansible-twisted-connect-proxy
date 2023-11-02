@@ -31,7 +31,7 @@ None
 ---
 - hosts: all
   roles:
-    - twisted-connect-proxy
+    - oefenweb.twisted-connect-proxy
 ```
 
 #### Example (with daemon options)
@@ -40,7 +40,7 @@ None
 ---
 - hosts: all
   roles:
-    - twisted-connect-proxy
+    - oefenweb.twisted-connect-proxy
   vars:
     twisted_connect_proxy_port: 3128
     twisted_connect_proxy_options: {}
