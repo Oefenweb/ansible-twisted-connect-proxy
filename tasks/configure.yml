@@ -16,7 +16,7 @@
     state: directory
     owner: "{{ twisted_connect_proxy_user }}"
     group: "{{ twisted_connect_proxy_group }}"
-    mode: 0755
+    mode: '0755'
   with_items: "{{ _stat_directories.results }}"
   when:
     - item.stat is defined
@@ -31,7 +31,7 @@
     dest: "{{ item.dest }}"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   with_items:
     - src: "{{ twisted_connect_proxy_etc_default_file.lstrip('/') }}.j2"
       dest: "{{ twisted_connect_proxy_etc_default_file }}"

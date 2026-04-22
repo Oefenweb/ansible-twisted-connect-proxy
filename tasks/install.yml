@@ -15,7 +15,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: '0755'
   tags:
     - twisted-connect-proxy-install-download
     - twisted-connect-proxy-install-download-directory
@@ -26,7 +26,7 @@
     dest: "{{ twisted_connect_proxy_downloads_path }}/server.py"
     owner: root
     group: root
-    mode: 0755
+    mode: '0755'
     force: true
   notify: restart twisted-connect-proxy
   tags:
