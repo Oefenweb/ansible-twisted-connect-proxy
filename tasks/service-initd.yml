@@ -6,7 +6,7 @@
     dest: "{{ twisted_connect_proxy_etc_init_d_file }}"
     owner: root
     group: root
-    mode: 0755
+    mode: '0755'
   notify: restart twisted-connect-proxy
   tags:
     - twisted-connect-proxy-service-initd-update
